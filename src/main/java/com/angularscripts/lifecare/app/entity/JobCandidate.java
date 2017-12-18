@@ -1,8 +1,6 @@
 package com.angularscripts.lifecare.app.entity;
 
 import java.io.Serializable;
-import java.util.UUID;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -17,7 +15,7 @@ public class JobCandidate implements Serializable {
 
 	@Id
 	@Column(name="CandidateId")
-	private UUID id;
+	private String id;
 	@Column(name="FirstName")
 	private String firstName;
 	@Column(name="LastName")
@@ -35,7 +33,7 @@ public class JobCandidate implements Serializable {
 		
 	}
 
-	public JobCandidate(UUID id, String firstName, String lastName, String emailId, String gender, String contactNumber,
+	public JobCandidate(String id, String firstName, String lastName, String emailId, String gender, String contactNumber,
 			String cvFilePath, String description) {
 		super();
 		this.id = id;
@@ -47,11 +45,11 @@ public class JobCandidate implements Serializable {
 		this.cvFilePath = cvFilePath;
 	}
 
-	public UUID getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(UUID id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

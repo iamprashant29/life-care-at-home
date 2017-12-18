@@ -30,7 +30,7 @@ public class Request implements Serializable {
 	String address;
 	@Column(name="EmailId")
 	String emailId;
-	@Column(name="ContactInfo")
+	@Column(name="ContactNo")
 	String contactNumber;
 	@Column(name="PatientName")
 	String patientName;

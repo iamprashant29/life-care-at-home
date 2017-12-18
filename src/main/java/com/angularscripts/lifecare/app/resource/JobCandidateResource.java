@@ -20,23 +20,33 @@ import com.angularscripts.lifecare.app.service.JobCandidateService;
 
 @Component
 @Path("/candidate")
-@Produces(MediaType.MULTIPART_FORM_DATA)
-@Consumes(MediaType.MULTIPART_FORM_DATA)
+
 public class JobCandidateResource {
 
 	@Autowired
 	JobCandidateService jobCandidateService;
+	
 	@POST
-	@Path("/resume/upload")  
-	public Response saveJobCandidateDetails(@FormDataParam("file") InputStream fileInputStream,
-            @FormDataParam("file") FormDataContentDisposition file,
-            @FormDataParam("candidate") JobCandidate candidate) {
+	@Path("/resume/upload") 
+	@Produces(MediaType.TEXT_PLAIN)
+	@Consumes(MediaType.MULTIPART_FORM_DATA)
+	public Response uploadResume(@FormDataParam("file") InputStream fileInputStream,
+            @FormDataParam("file") FormDataContentDisposition file) {
 		String filePath = jobCandidateService.uploadResume(fileInputStream, file);
 		if(filePath!=null) {
-			candidate.setCvFilePath(filePath);
-			System.out.println(candidate);
-			JobCandidate jobCandidate = jobCandidateService.storeJobCandidateDetails(candidate);
-			return Response.status(Status.CREATED).entity(jobCandidate).build();
+			return Response.status(Status.OK).entity(filePath).build();
+		}else {
+			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
+		}
+	}
+	
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response saveJobCandidateDetails(JobCandidate jobCandidate) {
+		JobCandidate savedJobCandidate  = jobCandidateService.storeJobCandidateDetails(jobCandidate);
+		if(savedJobCandidate!=null) {
+			return Response.status(Status.OK).entity(savedJobCandidate).build();
 		}else {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}
