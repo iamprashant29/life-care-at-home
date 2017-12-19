@@ -24,7 +24,7 @@ import com.angularscripts.lifecare.app.entity.Request;
 @Component
 public class EmailUtils {
 	
-	public void sendRequestEmail(Request request) {
+	public void sendRequestEmail(Request request) throws Exception {
 		Properties emailProperties = setEmailProperties();
 		Session session = getSession(emailProperties);
 		try {
@@ -55,12 +55,12 @@ public class EmailUtils {
 			System.out.println("Request email sent successfully....");
 		} catch (Exception e) {
 			System.out.println("Error sending request email....");
-			e.printStackTrace();
+			throw e;
 		}
 	}
 	
 	
-	public void sendAcknowledgementMail(Request request) {
+	public void sendAcknowledgementMail(Request request) throws Exception {
 		Properties emailProperties = setEmailProperties();
 		Session session = getSession(emailProperties);
 		try {
@@ -92,7 +92,7 @@ public class EmailUtils {
 			System.out.println("Acknowledgement email sent successfully....");
 		} catch (Exception e) {
 			System.out.println("Error sending acknowledgement email....");
-			e.printStackTrace();
+			throw e;
 		}
 	}
 	
