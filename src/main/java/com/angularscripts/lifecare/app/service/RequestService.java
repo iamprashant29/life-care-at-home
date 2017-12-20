@@ -16,10 +16,13 @@ public class RequestService {
 	@Autowired
 	EmailUtils emailUtils;
 	
-	public Request createRequest(Request request) {
-		emailUtils.sendRequestEmail(request);
+	public Request createRequest(Request request) throws Exception {
 		Request createdRequest = requestRepository.save(request);
-		emailUtils.sendAcknowledgementMail(createdRequest);
 		return createdRequest;
+	}
+	
+	public void sendEmail(Request request) throws Exception {
+		emailUtils.sendRequestEmail(request);
+		emailUtils.sendAcknowledgementMail(request);
 	}
 }

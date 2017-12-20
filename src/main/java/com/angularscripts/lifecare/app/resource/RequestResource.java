@@ -25,11 +25,24 @@ public class RequestResource {
 	
 	@POST
 	public Response createRequest(Request request) {
-		Request createdRequest = requestService.createRequest(request);
+		Request createdRequest;
+		try {
+			createdRequest = requestService.createRequest(request);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
+		}
 		if(createdRequest!=null) {
 			return Response.status(Status.CREATED).entity(createdRequest).build();	
 		} else {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}
+	}
+	
+	@POST
+	@Path("/email")
+	public Response sendEmail(Request request) throws Exception {
+		requestService.sendEmail(request);
+		return Response.status(Status.OK).build();
 	}
 }
