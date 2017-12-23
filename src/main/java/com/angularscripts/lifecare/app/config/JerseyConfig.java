@@ -10,14 +10,12 @@ import com.angularscripts.lifecare.app.resource.FeedbackResource;
 import com.angularscripts.lifecare.app.resource.JobCandidateResource;
 import com.angularscripts.lifecare.app.resource.NotificationResource;
 import com.angularscripts.lifecare.app.resource.RequestResource;
-import com.angularscripts.lifecare.app.resource.TestResource;
 
 @Configuration
 @ApplicationPath("lifecare/app")
 public class JerseyConfig extends ResourceConfig{
 
 	public JerseyConfig() {
-		register(TestResource.class);
 		register(JobCandidateResource.class);
 		register(MultiPartFeature.class);
 		register(FeedbackResource.class);
