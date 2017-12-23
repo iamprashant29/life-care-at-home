@@ -9,7 +9,7 @@ import javax.persistence.Id;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-@Entity
+//@Entity
 public class Notification implements Serializable {
 
 	/**
